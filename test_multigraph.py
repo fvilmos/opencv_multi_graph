@@ -1,3 +1,5 @@
+# https://github.com/fvilmos/opencv_multi_graph/edit/master/test_multigraph.py
+# Author: fvilmos
 import cv2
 import numpy as np
 import os

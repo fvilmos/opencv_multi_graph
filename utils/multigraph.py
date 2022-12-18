@@ -1,3 +1,6 @@
+#https://github.com/fvilmos/opencv_multi_graph/edit
+# Author: fvilmos
+
 import cv2
 import numpy as np
 
