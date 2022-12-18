@@ -62,53 +62,6 @@ class RealTimeGraph():
 
         cv2.polylines(img, [self.buffer],False, self.color, 1)
     
-    def set_scale(self,scale):
-        """
-        graph scale
-        Args:
-            scale (_type_): graph scaleing factor
-        """
-        self.scale = scale
-    
-    def set_offset(self,offset):
-        """
-        Data offset, usually the haf of the height
-
-        Args:
-            offset (_type_): int, usually the half of the height
-        """
-        self.offset = offset
-        self.buffer = np.array([[i,offset] for i in range (self.shape[1])])
-    
-    def set_color(self,color):
-        """
-        Graph/text color
-        Args:
-            color (_type_): i.e. [0,255,0] in BGR format
-        """
-        self.color = color
-    
-    def set_title_and_position(self,name='',postion=(10,10)):
-        """
-        Set graph title and position
-        Args:
-            name (str, optional): set the name of the title. Defaults to ''.
-            postion (tuple, optional): Defaults to (10,10).
-        """
-        self.title=name
-        self.title_position=postion
-    
-    def set_marker(self,value=0, size=3, color=[0,255,0]):
-        """
-        Set a circle on the graph to mark a value
-        Args:
-            value (int, optional): The value whre the marker will be activated. Defaults to 0.
-            size (int, optional): Marker is a circle, the size define the radius. Defaults to 3.
-        """
-        self.marker_size=size
-        self.marker_value=value
-        self.maker_color = color
-
     
     def puttext_bg(self,img,text='',position=(10,160), font_type=None, font_size=0.4, font_color=[0,255,0],bg_color=[0,0,0],font_thickness=1):
         """
@@ -150,13 +103,105 @@ class RealTimeMultiGraph():
         for i in range (nr_of_graphs):
             self.graphs_array.append(RealTimeGraph(shape=shape,scale=scale,offset=offset))
     
-    def update_data_point(self,img,data,index=0):
+    def __check_idenx_val(self,index):
+        """
+        Check if praph index is in the range
+
+        Args:
+            index (int): graph index
+
+        Returns:
+            boolean: True if index values is in range, else false
+        """
+        ret = False
+        if index < len(self.graphs_array):
+            ret = True
+
+        return ret
+    
+    def update_data_point(self,index,img,data):
         """
         Update the data point on a specific graph using the index
         Args:
-            img (_type_): image to draw
-            data (_type_): data point to draw. i.e. [0,255]
-            index (int, optional): Graph index. Defaults to 0.
+            index (int): Graph index. Defaults to 0.
+            img (array): image to draw
+            data (int): data point to draw. i.e. [0,255]
         """
+        if self.__check_idenx_val(index)==False:
+            print ('\n==graph index {} out of range!!!==\n'.format(int(index)))
+
         self.graphs_array[index].update_data_point(img,data)
+    
+    def set_scale(self,index,scale):
+        """
+        graph scale
+        Args:
+            index (int): graph number
+            scale (int): graph scaleing factor
+        """
+        if self.__check_idenx_val(index)==False:
+            print ('\n==graph index {} out of range!!!==\n'.format(int(index)))
+
+        self.graphs_array[index].scale = scale
+    
+    def set_offset(self,index,offset):
+        """
+        Data offset, usually the haf of the height
+
+        Args:
+            index (int): graph number
+            offset (int): int, usually the half of the height
+        """
+        
+        if self.__check_idenx_val(index)==False:
+            print ('\n==graph index {} out of range!!!==\n'.format(int(index)))
+
+        self.graphs_array[index].offset = offset
+        self.graphs_array[index].buffer = np.array([[i,offset] for i in range (self.graphs_array[index].shape[1])])
+    
+    def set_color(self,index, color):
+        """
+        Graph/text color
+        Args:
+            index (int): graph number
+            color (list): i.e. [0,255,0] in BGR format
+        """
+        
+        if self.__check_idenx_val(index)==False:
+            print ('\n==graph index {} out of range!!!==\n'.format(int(index)))
+
+        self.graphs_array[index].color = color
+    
+    def set_title_and_position(self,index,name='',postion=(10,10)):
+        """
+        Set graph title and position
+        Args:
+            index (int): graph number
+            name (str, optional): set the name of the title. Defaults to ''.
+            postion (tuple, optional): Defaults to (10,10).
+        """
+        
+        if self.__check_idenx_val(index)==False:
+            print ('\n==graph index {} out of range!!!==\n'.format(int(index)))
+
+        self.graphs_array[index].title = name
+        self.graphs_array[index].title_position = postion
+
+    
+    def set_marker(self,index,value=0, size=3, color=[0,255,0]):
+        """
+        Set a circle on the graph to mark a value
+        Args:
+            index (int): graph number
+            value (int, optional): The value whre the marker will be activated. Defaults to 0.
+            size (int, optional): Marker is a circle, the size define the radius. Defaults to 3.
+        """
+
+        if self.__check_idenx_val(index)==False:
+            print ('\n==graph index {} out of range!!!==\n'.format(int(index)))
+
+        self.graphs_array[index].marker_size=size
+        self.graphs_array[index].marker_value=value
+        self.graphs_array[index].maker_color=color
+
 

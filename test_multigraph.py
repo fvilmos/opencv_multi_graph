@@ -12,27 +12,24 @@ NR_OF_GRAPHS = 4
 rtmg = RealTimeMultiGraph(shape=[IMG_H,IMG_W,IMG_CHANNEL],nr_of_graphs=NR_OF_GRAPHS)
 
 # set properties
-rtmg.graphs_array[0].set_color([0,0,255])
-rtmg.graphs_array[1].set_color([0,255,255])
-rtmg.graphs_array[2].set_color([255,0,255])
+rtmg.set_color(0,[0,0,255])
+rtmg.set_color(1,[0,255,255])
+rtmg.set_color(2,[255,0,255])
 
-rtmg.graphs_array[1].set_scale(10)
-rtmg.graphs_array[1].set_offset(110)
+rtmg.set_scale(1,10)
+rtmg.set_offset(1,110)
 
-rtmg.graphs_array[2].set_scale(30)
-rtmg.graphs_array[2].set_offset(180)
+rtmg.set_scale(2,30)
+rtmg.set_offset(2,180)
 
-rtmg.graphs_array[3].set_scale(10)
-rtmg.graphs_array[3].set_offset(30)
-rtmg.graphs_array[3].set_marker(value=5,size=2,color=[0,0,255])
+rtmg.set_scale(3,10)
+rtmg.set_offset(3,30)
+rtmg.set_marker(3,value=5,size=2,color=[0,0,255])
 
-
-rtmg.graphs_array[0].set_title_and_position("sin/10",(10,10))
-rtmg.graphs_array[1].set_title_and_position("sin/2",(10,20))
-rtmg.graphs_array[2].set_title_and_position("random",(10,30))
-rtmg.graphs_array[3].set_title_and_position("random1",(10,40))
-
-
+rtmg.set_title_and_position(0,"sin/10",(10,10))
+rtmg.set_title_and_position(1,"sin/2",(10,20))
+rtmg.set_title_and_position(2,"random",(10,30))
+rtmg.set_title_and_position(3,"random1",(10,40))
 
 count = 0
 y0,y1,y2,y3 = 0,0,0,0
@@ -54,10 +51,10 @@ while True:
         y3 = np.random.choice([0,1,2,3,4,5])
 
     # update the graphs
-    rtmg.update_data_point(img,[0,y0],0)
-    rtmg.update_data_point(img,[0,y1],1)
-    rtmg.update_data_point(img,[0,-y2],2)
-    rtmg.update_data_point(img,[0,y3],3)
+    rtmg.update_data_point(0,img,[0,y0])
+    rtmg.update_data_point(1,img,[0,y1])
+    rtmg.update_data_point(2,img,[0,-y2])
+    rtmg.update_data_point(3,img,[0,y3])
 
     k = cv2.waitKey(10)
 

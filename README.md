@@ -20,11 +20,11 @@ Features:
 ```
 ex. setup a single graph with parameters
 # set properties
-rtmg.graphs_array[0].set_color([0,0,255])
-rtmg.graphs_array[0].set_scale(10)
-rtmg.graphs_array[0].set_offset(110)
-rtmg.graphs_array[0].set_marker(value=5,size=2,color=[0,0,255])
-rtmg.graphs_array[0].set_title_and_position("sin/10",(10,10))
+rtmg.set_color(0,[0,0,255])
+rtmg.set_scale(0,10)
+rtmg.set_offset(0,110)
+rtmg.set_marker(0,value=5,size=2,color=[0,0,255])
+rtmg.set_title_and_position(0,"sin/10",(10,10))
 
 ```
 
