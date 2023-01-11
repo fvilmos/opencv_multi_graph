@@ -1,4 +1,4 @@
-#https://github.com/fvilmos/opencv_multi_graph/edit
+#https://github.com/fvilmos/opencv_multi_graph
 # Author: fvilmos
 
 import cv2
